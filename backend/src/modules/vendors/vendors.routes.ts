@@ -58,18 +58,8 @@ router.post("/", authMiddleware, VendorsController.create);
  *         description: Internal server error
  */
 router.get("/", VendorsController.list);
-router.get(
-  "/mine",
-  authMiddleware,
-  requireRole("VENDOR"),
-  VendorsController.getMine,
-);
-router.get(
-  "/mine/agents",
-  authMiddleware,
-  requireRole("VENDOR"),
-  VendorsController.getMyAgents,
-);
+router.get("/mine", authMiddleware, requireRole("VENDOR"), VendorsController.getMine);
+router.get("/mine/agents", authMiddleware, requireRole("VENDOR"), VendorsController.getMyAgents);
 
 /**
  * @swagger
@@ -133,12 +123,7 @@ router.get("/:id", VendorsController.get);
  *       401:
  *         description: Unauthorized
  */
-router.put(
-  "/:id",
-  authMiddleware,
-  requireRole("ADMIN", "VENDOR"),
-  VendorsController.update,
-);
+router.put("/:id", authMiddleware, requireRole("ADMIN", "VENDOR"), VendorsController.update);
 
 /**
  * @swagger
@@ -163,11 +148,6 @@ router.put(
  *       500:
  *         description: Internal server error
  */
-router.delete(
-  "/:id",
-  authMiddleware,
-  requireRole("ADMIN"),
-  VendorsController.delete,
-);
+router.delete("/:id", authMiddleware, requireRole("ADMIN"), VendorsController.delete);
 
 export default router;
