@@ -13,7 +13,7 @@ export default function CartScreen() {
 
   const handleCheckout = () => {
     if (items.length === 0) return;
-    
+    // Check if user is authenticated before proceeding to checkout
     if (!token) {
       Alert.alert(
         'Authentication Required',
