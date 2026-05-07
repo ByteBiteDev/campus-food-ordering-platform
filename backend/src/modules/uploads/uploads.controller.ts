@@ -15,6 +15,12 @@ export const UploadsController = {
         return res.status(400).json({ error: "File size exceeds 10MB limit" });
       }
 
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
+      if (!allowedTypes.includes(file.mimetype)) {
+        return res.status(400).json({ error: "Invalid file type. Only JPEG, PNG, GIF, and PDF are allowed" });
+      }
+
       const uploadData = {
         filename: file.originalname,
         mimetype: file.mimetype,
