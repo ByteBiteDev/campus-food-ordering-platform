@@ -86,6 +86,27 @@ router.get("/:id", VendorsController.get);
 
 /**
  * @swagger
+ * /api/vendors/{id}/stats:
+ *   get:
+ *     summary: Get vendor statistics
+ *     tags: [Vendors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The vendor ID
+ *     responses:
+ *       200:
+ *         description: Vendor statistics
+ *       404:
+ *         description: Vendor not found
+ */
+router.get("/:id/stats", VendorsController.getStats);
+
+/**
+ * @swagger
  * /api/vendors/{id}:
  *   put:
  *     summary: Update a vendor by ID
