@@ -3,14 +3,14 @@ import { prisma } from "../../lib/prisma";
 export const VendorsService = {
   async create(data: any) {
     return prisma.vendor.create({
-      data,
+      data
     });
   },
 
   async update(id: string, data: any) {
     return prisma.vendor.update({
       where: { id },
-      data,
+      data
     });
   },
 
@@ -23,10 +23,10 @@ export const VendorsService = {
           select: {
             id: true,
             name: true,
-            phone: true,
-          },
-        },
-      },
+            phone: true
+          }
+        }
+      }
     });
   },
 
@@ -38,12 +38,12 @@ export const VendorsService = {
           select: {
             id: true,
             name: true,
-            phone: true,
-          },
+            phone: true
+          }
         },
         meals: true,
-        orders: true,
-      },
+        orders: true
+      }
     });
   },
 
@@ -77,7 +77,7 @@ export const VendorsService = {
 
   async delete(id: string) {
     return prisma.vendor.delete({
-      where: { id },
+      where: { id }
     });
-  },
+  }
 };
