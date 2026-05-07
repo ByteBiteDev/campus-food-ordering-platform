@@ -9,6 +9,12 @@ export const UploadsController = {
         return res.status(400).json({ error: "No file uploaded" });
       }
 
+      // Validate file size (max 10MB)
+      const maxSize = 10 * 1024 * 1024;
+      if (file.size > maxSize) {
+        return res.status(400).json({ error: "File size exceeds 10MB limit" });
+      }
+
       const uploadData = {
         filename: file.originalname,
         mimetype: file.mimetype,
