@@ -10,3 +10,8 @@ export const UploadSchema = z.object({
 export const CreateUploadSchema = z.object({
   file: z.any()
 });
+
+export const UpdateUploadSchema = z.object({
+  filename: z.string().optional(),
+  url: z.string().url().optional()
+});
