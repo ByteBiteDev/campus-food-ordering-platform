@@ -44,6 +44,16 @@ export const VendorsController = {
     }
   },
 
+  async getStats(req: Request, res: Response) {
+    try {
+      const vendorId = req.params.id as string;
+      const stats = await VendorsService.getVendorStats(vendorId);
+      res.json(stats);
+    } catch (e: any) {
+      res.status(400).json({ error: e.message });
+    }
+  },
+
   async delete(req: Request, res: Response) {
     res.json(await VendorsService.delete(req.params.id as string));
   }
