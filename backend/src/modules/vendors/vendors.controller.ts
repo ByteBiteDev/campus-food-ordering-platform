@@ -1,5 +1,8 @@
 import type { Request, Response } from "express";
-import { CreateVendorSchema, UpdateVendorSchema } from "./vendors.schema";
+import {
+  CreateVendorSchema,
+  UpdateVendorSchema
+} from "./vendors.schema";
 import { VendorsService } from "./vendors.service";
 
 export const VendorsController = {
@@ -43,5 +46,5 @@ export const VendorsController = {
 
   async delete(req: Request, res: Response) {
     res.json(await VendorsService.delete(req.params.id as string));
-  },
+  }
 };
