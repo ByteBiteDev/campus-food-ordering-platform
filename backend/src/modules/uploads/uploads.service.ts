@@ -46,5 +46,21 @@ export const UploadsService = {
     } catch (error) {
       throw new Error("Failed to delete upload");
     }
+  },
+
+  async searchByFilename(query: string) {
+    try {
+      return prisma.upload.findMany({
+        where: {
+          filename: {
+            contains: query,
+            mode: "insensitive"
+          }
+        },
+        orderBy: { createdAt: "desc" }
+      });
+    } catch (error) {
+      throw new Error("Failed to search uploads");
+    }
   }
 };
