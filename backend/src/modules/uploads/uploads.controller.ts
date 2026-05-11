@@ -65,5 +65,18 @@ export const UploadsController = {
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }
+  },
+
+  async search(req: Request, res: Response) {
+    try {
+      const query = req.query.q as string;
+      if (!query) {
+        return res.status(400).json({ error: "Search query is required" });
+      }
+      const uploads = await UploadsService.searchByFilename(query);
+      res.json(uploads);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
   }
 };
