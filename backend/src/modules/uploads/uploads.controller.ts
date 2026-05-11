@@ -1,6 +1,8 @@
 import type { Request, Response } from "express";
 import { UploadsService } from "./uploads.service";
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
 export const UploadsController = {
   async upload(req: Request, res: Response) {
     try {
@@ -10,8 +12,7 @@ export const UploadsController = {
       }
 
       // Validate file size (max 10MB)
-      const maxSize = 10 * 1024 * 1024;
-      if (file.size > maxSize) {
+      if (file.size > MAX_FILE_SIZE) {
         return res.status(400).json({ error: "File size exceeds 10MB limit" });
       }
 
