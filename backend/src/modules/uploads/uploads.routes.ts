@@ -57,6 +57,31 @@ router.get("/", authMiddleware, UploadsController.list);
 
 /**
  * @swagger
+ * /api/uploads/search:
+ *   get:
+ *     summary: Search uploads by filename
+ *     tags: [Uploads]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Search query string
+ *     responses:
+ *       200:
+ *         description: Search results
+ *       400:
+ *         description: Missing search query
+ *       401:
+ *         description: Unauthorized
+ */
+router.get("/search", authMiddleware, UploadsController.search);
+
+/**
+ * @swagger
  * /api/uploads/{id}:
  *   get:
  *     summary: Get an upload by ID

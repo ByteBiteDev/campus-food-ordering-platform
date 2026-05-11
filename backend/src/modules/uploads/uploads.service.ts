@@ -11,9 +11,12 @@ export const UploadsService = {
     }
   },
 
-  async list() {
+  async list(page: number = 1, limit: number = 10) {
     try {
+      const skip = (page - 1) * limit;
       return prisma.upload.findMany({
+        skip,
+        take: limit,
         orderBy: { createdAt: "desc" }
       });
     } catch (error) {
@@ -42,6 +45,22 @@ export const UploadsService = {
       });
     } catch (error) {
       throw new Error("Failed to delete upload");
+    }
+  },
+
+  async searchByFilename(query: string) {
+    try {
+      return prisma.upload.findMany({
+        where: {
+          filename: {
+            contains: query,
+            mode: "insensitive"
+          }
+        },
+        orderBy: { createdAt: "desc" }
+      });
+    } catch (error) {
+      throw new Error("Failed to search uploads");
     }
   }
 };

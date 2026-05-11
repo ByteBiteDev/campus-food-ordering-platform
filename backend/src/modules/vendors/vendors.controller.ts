@@ -18,7 +18,8 @@ export const VendorsController = {
   },
 
   async list(req: Request, res: Response) {
-    res.json(await VendorsService.list());
+    const location = req.query.location as string | undefined;
+    res.json(await VendorsService.list(location));
   },
 
   async get(req: Request, res: Response) {

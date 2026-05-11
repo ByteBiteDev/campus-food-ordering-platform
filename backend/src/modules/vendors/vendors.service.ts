@@ -14,9 +14,12 @@ export const VendorsService = {
     });
   },
 
-  async list() {
+  async list(location?: string) {
     return prisma.vendor.findMany({
-      where: { isApproved: true },
+      where: {
+        isApproved: true,
+        ...(location ? { location: { contains: location, mode: "insensitive" } } : {})
+      },
       orderBy: { createdAt: "desc" },
       include: {
         manager: {

@@ -1,6 +1,8 @@
 import type { Request, Response } from "express";
 import { UploadsService } from "./uploads.service";
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
 export const UploadsController = {
   async upload(req: Request, res: Response) {
     try {
@@ -10,8 +12,7 @@ export const UploadsController = {
       }
 
       // Validate file size (max 10MB)
-      const maxSize = 10 * 1024 * 1024;
-      if (file.size > maxSize) {
+      if (file.size > MAX_FILE_SIZE) {
         return res.status(400).json({ error: "File size exceeds 10MB limit" });
       }
 
@@ -37,7 +38,9 @@ export const UploadsController = {
 
   async list(req: Request, res: Response) {
     try {
-      const uploads = await UploadsService.list();
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+      const uploads = await UploadsService.list(page, limit);
       res.json(uploads);
     } catch (e: any) {
       res.status(500).json({ error: e.message });
@@ -60,6 +63,19 @@ export const UploadsController = {
     try {
       await UploadsService.delete(req.params.id as string);
       res.json({ message: "Upload deleted successfully" });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  },
+
+  async search(req: Request, res: Response) {
+    try {
+      const query = req.query.q as string;
+      if (!query) {
+        return res.status(400).json({ error: "Search query is required" });
+      }
+      const uploads = await UploadsService.searchByFilename(query);
+      res.json(uploads);
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }
