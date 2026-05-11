@@ -120,12 +120,12 @@ graph TD
 ### 2.4 API Design & Endpoint Specification
 
 | Endpoint                         | Method | Role   | Request Payload                     |
-| -------------------------------- | ------ | ------ | ----------------------------------- | --------- |
+| -------------------------------- | ------ | ------ | ----------------------------------- |
 | `/api/auth/register`             | POST   | ALL    | `{ name, phone, password }`         |
 | `/api/meals`                     | POST   | VENDOR | `{ name, price, vendorId, ... }`    |
-| `/api/orders`                    | POST   | USER   | `{ vendorId, orderType, items:[] }` |
+| `/api/orders`                    | POST   | USER   | `{ vendorId, orderType, items: [] }` |
 | `/api/admin/vendors/:id/approve` | PUT    | ADMIN  | `{ id: string }`                    |
-| `/api/agents/me/status`          | PATCH  | AGENT  | `{ status: "AVAILABLE"              | "BUSY" }` |
+| `/api/agents/me/status`          | PATCH  | AGENT  | `{ status: "AVAILABLE" \| "BUSY" }` |
 
 ---
 
