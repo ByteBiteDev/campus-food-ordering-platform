@@ -37,7 +37,9 @@ export const UploadsController = {
 
   async list(req: Request, res: Response) {
     try {
-      const uploads = await UploadsService.list();
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+      const uploads = await UploadsService.list(page, limit);
       res.json(uploads);
     } catch (e: any) {
       res.status(500).json({ error: e.message });
