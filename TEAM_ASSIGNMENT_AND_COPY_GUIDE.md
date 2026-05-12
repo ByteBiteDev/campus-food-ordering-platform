@@ -41,16 +41,6 @@ Each member is assigned one main area.
    Files:
    - `MyNewApp/components/**/*`
 
-## How Each Member Should Copy Code
-1. Open both folders side by side:
-   - original: `Mobile-App`
-   - template: `CLASS_PROJECTS/Mobile-App-Team-Template`
-2. Go to your assigned files in the original project.
-3. Copy the full content from each original file.
-4. Paste it into the matching empty file in the template project.
-5. Save all edited files.
-6. Do not edit files outside your assigned area.
-
 ## After Everyone Finishes
 Run these commands from both app folders inside the template project:
 
